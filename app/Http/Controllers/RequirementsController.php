@@ -57,6 +57,7 @@ class RequirementsController extends Controller
      * 存储新的sql语句
      * @param Request $request 请求参数
      * @return array
+     * @author xues
      */
     public function storeSql(Request $request)
     {
