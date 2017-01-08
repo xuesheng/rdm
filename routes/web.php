@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/dashboard', 'HomeController@index');
 
 Route::get('/requirements/create', 'RequirementsController@create');
 
@@ -25,4 +25,6 @@ Route::post('/requirements/implode', 'RequirementsController@implode');
 Route::post('/requirements/storeSql', 'RequirementsController@storeSql');
 
 Route::get('/requirements/edit/{id}', 'RequirementsController@edit');
+Route::get('/requirements/show/{id}', 'RequirementsController@show');
 Route::post('/requirements/uploadfile', 'RequirementsFilesController@upload');
+Route::get('/requirements/lists', 'RequirementsController@lists');

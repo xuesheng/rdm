@@ -22,12 +22,16 @@ class RequirementsController extends Controller
     /**
      * 需求列表
      *
-     * @return void
+     * @return object
      * @author Xues
      */
     public function lists()
     {
+        $lists = Requirements::where('user_id', Auth::id())->withCount('files')->get();
 
+        return view('requirements.lists', [
+            'lists' => $lists,
+        ]);
     }
 
     /**
@@ -48,9 +52,29 @@ class RequirementsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //code
+    }
 
+    /**
+     * 查看需求
+     * @param Request $request 请求参数
+     * @param int $id 需求id
+     * @return array
+     * @author xues
+     */
+    public function show(Request $request, $id = 0)
+    {
+        $requirements = Requirements::findOrFail($id);
 
+        return view('requirements.show', [
+            'id' => $requirements->id,
+            'serial_number' => $requirements->serial_number,
+            'name' => $requirements->name,
+            'sponsor' => $requirements->sponsor,
+            'finished_at' => $requirements->finished_at,
+            'sqls' => $requirements->sqls()->orderBy('id', 'desc')->pluck('sql'),
+            'files' => $requirements->files()->get(['name','local_path']),
+        ]);
     }
 
     /**
@@ -168,15 +192,16 @@ class RequirementsController extends Controller
      */
     public function edit(Request $request, $id = 0)
     {
-        $dataModel = Requirements::findOrFail($id);
+        $requirements = Requirements::findOrFail($id);
+
         return view('requirements.edit', [
-            'id' => $dataModel->id,
-            'serial_number' => $dataModel->serial_number,
-            'name' => $dataModel->name,
-            'sponsor' => $dataModel->sponsor,
-            'finished_at' => $dataModel->finished_at,
-            'sqls' => $dataModel->sqls()->orderBy('id', 'desc')->pluck('sql'),
-            'files' => $dataModel->files()->get(['name','local_path']),
+            'id' => $requirements->id,
+            'serial_number' => $requirements->serial_number,
+            'name' => $requirements->name,
+            'sponsor' => $requirements->sponsor,
+            'finished_at' => $requirements->finished_at,
+            'sqls' => $requirements->sqls()->orderBy('id', 'desc')->pluck('sql'),
+            'files' => $requirements->files()->get(['name','local_path']),
         ]);
     }
 

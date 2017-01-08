@@ -6,32 +6,33 @@
 
             <div class="col-md-4">
                 <div>
-                    <h4>需求信息</h4>
+                    <h4>编辑需求</h4>
                     <input type="hidden" value="{{ $id }}" ref="requirement_id">
                     <p><span>需求编号：</span><mark>{{ $serial_number }}</mark></p>
                     <p><span>需求名称：</span><mark>{{ $name }}</mark></p>
                     <p><span>需求发起人：</span><mark>{{ $sponsor }}</mark></p>
-                    <p><span>截止时间：</span><mark>{{ $finished_at }}</mark></p>
+                    <p><span>截止日期：</span><mark>{{ $finished_at }}</mark></p>
+                    <p><strong><span>上线时间：</span><mark>2017-01-08 12:00:00</mark></strong></p>
                 </div>
 
-                <p>
+                <div>
                     <h6>备注</h6>
-                    <div><textarea name="remark" id="remark" cols="30" rows="5"></textarea></div>
-                    <div><button class="btn btn-primary btn-sm">保存备注</button></div>
-                </p>
+                    <p><textarea class="form-control" name="remark" id="remark" rows="5"></textarea></p>
+                    <p><button class="btn btn-primary btn-sm">保存备注</button></p>
+                </div>
 
             </div>
 
             <div class="col-md-4">
-                <h4>编辑需求</h4>
-                <p>上传代码</p>
+                <h4>&nbsp;</h4>
+                <p><strong>上传代码</strong></p>
                 <form method="post" enctype="multipart/form-data" action="/requirements/uploadfile">
                     <input type="hidden" name="requirement_id" value="{{ $id }}">
                     <p><input id="code-file" class="file" type="file" name="code_file"></p>
                     {{ csrf_field() }}
                     <p>
                         <h6>本地路径</h6>
-                        <div><input id="local-path" type="text" name="local_path" value="" class="form-control"></div>
+                        <div><input id="local-path" type="text" name="local_path" value="" class="form-control" placeholder="选填项"></div>
                     </p>
                     @if (session('msg'))
                     <div class="alert alert-danger alert-sm">
@@ -51,7 +52,11 @@
                     <h5>代码目录</h5>
                     <ul>
                         @foreach ($files as $file)
-                            <li><mark>{{ $file['name'] }}</mark><br>[ {{ $file['local_path'] }} ]</li>
+                            <li><mark>{{ $file['name'] }}</mark>
+                                @if ($file['local_path'])
+                                <br>[ {{ $file['local_path'] }} ]
+                                @endif
+                            </li>
                         @endforeach
                     </ul>
                 </p>
@@ -63,7 +68,7 @@
                 <div>
                     <p><button class="btn btn-primary btn-sm" v-on:click="addSql(newSql)" ref="button_add_sql">新增SQL</button></p>
 
-                    <p><textarea name="sql" id="new-sql" cols="50" rows="2" v-model="newSql"></textarea></p>
+                    <p><textarea class="form-control" name="sql" id="new-sql" v-model="newSql" rows="5"></textarea></p>
                 </div>
                 <p>
                     <h5>SQL语句</h5>
