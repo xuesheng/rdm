@@ -33,9 +33,9 @@ class Requirements extends Model
     public function fetchZenDaoData($serialNumber = 0)
     {
         $client = new Client([
-            'base_uri' => 'http://erp.dotfashion.cn',
+            'base_uri' => '/baseUrl',
             'timeout' => 2.0,
-            'auth' => ['xuesheng', '123456'],
+            'auth' => ['username', 'password'],
         ]);
         $response = $client->request('GET', '/www/index.php?m=task&f=view&t=html&id='.$serialNumber);
         $html = $response->getBody()->getContents();
