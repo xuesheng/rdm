@@ -7,7 +7,7 @@ use App\Requirements;
 use App\RequirementsSqls;
 use Illuminate\Support\Facades\Auth;
 
-class RequirementsController extends Controller
+class RequirementController extends Controller
 {
     /**
      * Create a new controller instance.

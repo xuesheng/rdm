@@ -26,7 +26,7 @@
             <div class="col-md-4">
                 <h4>&nbsp;</h4>
                 <p><strong>上传代码</strong></p>
-                <form method="post" enctype="multipart/form-data" action="/requirements/uploadfile">
+                <form method="post" enctype="multipart/form-data" action="/requirement/uploadfile">
                     <input type="hidden" name="requirement_id" value="{{ $id }}">
                     <p><input id="code-file" class="file" type="file" name="code_file"></p>
                     {{ csrf_field() }}

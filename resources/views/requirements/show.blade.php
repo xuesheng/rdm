@@ -8,7 +8,7 @@
                 <div>
                     <h4>
                         <span>编辑需求</span>
-                        <a href="/requirements/edit/{{ $id }}" class="btn btn-primary btn-xs">编辑</a>
+                        <a href="/requirement/edit/{{ $id }}" class="btn btn-primary btn-xs">编辑</a>
                     </h4>
                     <p><span>需求编号：</span><mark>{{ $serial_number }}</mark></p>
                     <p><span>需求名称：</span><mark>{{ $name }}</mark></p>

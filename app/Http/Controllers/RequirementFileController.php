@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\RequirementsFiles;
 use App\Requirements;
-use Illuminate\Support\Facades\Validator;
 
-class RequirementsFilesController extends Controller
+class RequirementFileController extends Controller
 {
 
     /**

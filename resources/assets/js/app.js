@@ -34,7 +34,7 @@ const app = new Vue({
             }
             this.$refs.button_fetch.disabled = true;
             this.$refs.input_serial_number.disabled = true;
-            this.$http.post('/requirements/implode', {serial_number: this.serial_number}).then(
+            this.$http.post('/requirement/implode', {serial_number: this.serial_number}).then(
                 function (response) {
                     if (response.body.code) {
                         alert(response.body.msg);
@@ -47,7 +47,7 @@ const app = new Vue({
                     this.name = response.body.data.name;
                     this.sponsor = response.body.data.sponsor;
                     this.finished_at = response.body.data.finished_at;
-                    this.$refs.a_edit.href = '/requirements/edit/'+this.id;
+                    this.$refs.a_edit.href = '/requirement/edit/'+this.id;
                     this.a_edit_hidden = false;
 
                 },
@@ -59,7 +59,7 @@ const app = new Vue({
         addSql: function(sql) {
             if(sql != '' && !this.ifContains(sql, this.sqls)){
                 this.$refs.button_add_sql.disabled = true;
-                this.$http.post('/requirements/storeSql', {id: this.$refs.requirement_id.value, sql: sql}).then(function(response){
+                this.$http.post('/requirement/storeSql', {id: this.$refs.requirement_id.value, sql: sql}).then(function(response){
                     this.$refs.button_add_sql.disabled = false;
 
                     if (response.body.code) {
@@ -89,9 +89,8 @@ const app = new Vue({
 });
 
 $(function () {
-    //获取上传文件的本地路径
-    $('#code-file').change(function() {
-        //$('#local-path').val($(this).val());
-    });
+    //个人中心菜单项激活
+    $("#user-center-sidebar a").removeClass('active');
+    $('a[href="'+document.URL+'"]').addClass('active');
 
 });

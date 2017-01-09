@@ -27,9 +27,9 @@
                             <td>2017-01-05 12:00:00</td>
                             <td>{{ $list['files_count'] }}（个）</td>
                             <td>
-                                <a href="/requirements/show/{{ $list['id'] }}" class="btn btn-primary btn-xs" target="_blank">详细</a>
-                                <a href="/requirements/edit/{{ $list['id'] }}" class="btn btn-primary btn-xs" target="_blank">编辑</a>
-                                <a href="/requirements/download/{{ $list['id'] }}" class="btn btn-primary btn-xs" target="_blank">下载代码</a>
+                                <a href="/requirement/show/{{ $list['id'] }}" class="btn btn-primary btn-xs" target="_blank">详细</a>
+                                <a href="/requirement/edit/{{ $list['id'] }}" class="btn btn-primary btn-xs" target="_blank">编辑</a>
+                                <a href="/requirement/download/{{ $list['id'] }}" class="btn btn-primary btn-xs" target="_blank">下载代码</a>
                             </td>
                         </tr>
                     @endforeach

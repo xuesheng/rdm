@@ -8,7 +8,7 @@
                 <div class="panel-heading">控制台</div>
 
                 <div class="panel-body">
-                    <ul><li><a href="/requirements/lists">需求中心</a></li></ul>
+                    <ul><li><a href="/requirement/lists">需求中心</a></li></ul>
                 </div>
             </div>
         </div>

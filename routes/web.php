@@ -14,17 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/dashboard', 'HomeController@index');
 
-Route::get('/requirements/create', 'RequirementsController@create');
+//需求路由
+Route::get('/requirement/create', 'RequirementController@create');
+Route::post('/requirement/implode', 'RequirementController@implode');
+Route::post('/requirement/storeSql', 'RequirementController@storeSql');
+Route::get('/requirement/edit/{id}', 'RequirementController@edit');
+Route::get('/requirement/show/{id}', 'RequirementController@show');
+Route::post('/requirement/uploadfile', 'RequirementFileController@upload');
+Route::get('/requirement/lists', 'RequirementController@lists');
 
-Route::post('/requirements/implode', 'RequirementsController@implode');
-Route::post('/requirements/storeSql', 'RequirementsController@storeSql');
-
-Route::get('/requirements/edit/{id}', 'RequirementsController@edit');
-Route::get('/requirements/show/{id}', 'RequirementsController@show');
-Route::post('/requirements/uploadfile', 'RequirementsFilesController@upload');
-Route::get('/requirements/lists', 'RequirementsController@lists');
+//用户路由
+Route::get('/user/center', 'UserController@center');

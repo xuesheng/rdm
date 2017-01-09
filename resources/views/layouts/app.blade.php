@@ -61,6 +61,12 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/dashboard') }}">控制台</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/user/center') }}">个人中心</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
