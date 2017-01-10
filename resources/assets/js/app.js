@@ -84,13 +84,12 @@ const app = new Vue({
             return false;
         }
 
-
     }
 });
 
 $(function () {
     //个人中心菜单项激活
-    $("#user-center-sidebar a").removeClass('active');
-    $('a[href="'+document.URL+'"]').addClass('active');
+    $("#user-center-sidebar > a").removeClass('active');
+    $('#user-center-sidebar > a[href="'+document.URL+'"]').addClass('active');
 
 });

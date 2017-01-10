@@ -27,4 +27,6 @@ Route::post('/requirement/uploadfile', 'RequirementFileController@upload');
 Route::get('/requirement/lists', 'RequirementController@lists');
 
 //用户路由
-Route::get('/user/center', 'UserController@center');
+Route::get('/user/center', 'UserController@baseInfo');
+Route::get('/user/zendao', 'UserController@zendao');
+Route::post('/user/update', 'UserController@update');
