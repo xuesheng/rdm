@@ -28,5 +28,5 @@ Route::get('/requirement/lists', 'RequirementController@lists');
 
 //用户路由
 Route::get('/user/center', 'UserController@baseInfo');
-Route::get('/user/zendao', 'UserController@zendao');
+Route::get('/user/zendao', 'UserController@zenDao');
 Route::post('/user/update', 'UserController@update');

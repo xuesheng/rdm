@@ -66,5 +66,18 @@ class UserController extends Controller
         return redirect(url('user/center'))->with('success_msg', '更新成功');
     }
 
+    public function zenDao()
+    {
+        return view('user.zendao', [
+            'zendao_username' => '',
+            'zendao_password' => ''
+        ]);
+
+
+    }
+
+
+
+
 
 }

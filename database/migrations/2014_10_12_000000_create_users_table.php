@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('zendao_username');
-            $table->string('zendao_password');
+            $table->string('zendao_username')->default('');
+            $table->string('zendao_password')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
