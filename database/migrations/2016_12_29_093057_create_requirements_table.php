@@ -21,8 +21,8 @@ class CreateRequirementsTable extends Migration
             $table->string('sponsor', 20)->comment('需求发起者');
             $table->string('remark')->default('')->comment('备注');
             $table->string('directory_name')->default('')->comment('需求对应目录名');
-            $table->timestamp('deployment_at')->nullable()->comment('上线时间');
-            $table->timestamp('finished_at')->nullable()->comment('截止时间');
+            $table->unsignedInteger('finished_at')->default(0)->comment('截止时间');
+            $table->unsignedInteger('deployment_at')->default(0)->comment('上线时间');
             $table->timestamps();
         });
     }

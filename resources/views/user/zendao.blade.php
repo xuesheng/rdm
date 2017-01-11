@@ -1,18 +1,17 @@
 @extends('user.layouts')
 @section('main')
-
     <div class="row">
         <div class="col-md-5 col-md-offset-1">
             <form role="form" class="form-horizontal" action="{{ url('user/update') }}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label>用户名</label>
-                    <input class="form-control" type="text" value="{{ $name }}" name="name">
+                    <label>禅道账号</label>
+                    <input class="form-control" type="text" value="{{ $zendao_username }}" name="zendao_username">
                 </div>
 
                 <div class="form-group">
-                    <label>账号</label>
-                    <input class="form-control" type="text" value="123456@qq.com" disabled>
+                    <label>禅道密码</label>
+                    <input class="form-control" type="text" value="{{ $zendao_password }}" name="zendao_password">
                 </div>
 
                 @if (session('msg'))
@@ -39,4 +38,3 @@
         </div>
     </div>
 @endsection
-

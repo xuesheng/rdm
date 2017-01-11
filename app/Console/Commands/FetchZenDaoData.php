@@ -41,11 +41,9 @@ class FetchZenDaoData extends Command
     public function handle()
     {
         $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => '/baseUrl',
-            // You can set any number of default request options.
+            'base_uri' => env('ZENDAO_URL'),
             'timeout' => 2.0,
-            'auth' => ['username', 'password'],
+            'auth' => [Auth::user()->zendao_username, Auth::user()->zendao_password],
         ]);
 
         $response = $client->request('GET', '/www/index.php?m=task&f=view&t=html&id=36331');

@@ -8,14 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
     /**
      * 要更新的字段
      *
      * @return void
      */
     protected $updatedField = [
-        'name',
+        'name','zendao_username','zendao_password'
     ];
 
     /**
@@ -37,7 +36,7 @@ class UserController extends Controller
      */
     public function baseInfo(Request $request)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = Auth::user();
         return view('user.center', [
             'name' => $request->old('name') ? $request->old('name') : $user->name,
         ]);
@@ -51,7 +50,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = Auth::user();
 
         foreach ($this->updatedField as $field) {
             if ($request->has($field)) {
@@ -60,23 +59,27 @@ class UserController extends Controller
         }
 
         if (!$user->save()) {
-            return redirect(url('user/center'))->withInput()->with('msg', '更新失败');
+            return back()->withInput()->with('msg', '更新失败');
         }
 
-        return redirect(url('user/center'))->with('success_msg', '更新成功');
+        return back()->with('success_msg', '更新成功');
     }
 
     public function zenDao()
     {
         return view('user.zendao', [
-            'zendao_username' => '',
-            'zendao_password' => ''
+            'zendao_username' => Auth::user()->zendao_username,
+            'zendao_password' => Auth::user()->zendao_password
         ]);
-
-
     }
 
-
+    public function secure()
+    {
+        return view('user.secure', [
+            'zendao_username' => Auth::user()->zendao_username,
+            'zendao_password' => Auth::user()->zendao_password
+        ]);
+    }
 
 
 

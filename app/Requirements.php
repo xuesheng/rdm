@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Requirements extends Model
@@ -33,9 +34,9 @@ class Requirements extends Model
     public function fetchZenDaoData($serialNumber = 0)
     {
         $client = new Client([
-            'base_uri' => '/baseUrl',
+            'base_uri' => env('ZENDAO_URL'),
             'timeout' => 2.0,
-            'auth' => ['username', 'password'],
+            'auth' => [Auth::user()->zendao_username, Auth::user()->zendao_password],
         ]);
         $response = $client->request('GET', '/www/index.php?m=task&f=view&t=html&id='.$serialNumber);
         $html = $response->getBody()->getContents();

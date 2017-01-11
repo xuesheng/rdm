@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes();
 Route::get('/dashboard', 'HomeController@index');
 
@@ -29,4 +30,5 @@ Route::get('/requirement/lists', 'RequirementController@lists');
 //用户路由
 Route::get('/user/center', 'UserController@baseInfo');
 Route::get('/user/zendao', 'UserController@zenDao');
+Route::get('/user/secure', 'UserController@secure');
 Route::post('/user/update', 'UserController@update');

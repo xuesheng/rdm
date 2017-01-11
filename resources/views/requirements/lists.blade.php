@@ -3,8 +3,15 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="col-md-2"><h5><strong>需求列表</strong></h5></div>
+            <div class="col-md-2 col-md-offset-8 text-right">
+                <a href="/requirement/import" class="btn btn-primary btn-sm" target="_blank">导入</a>
+                <a href="/requirement/create" class="btn btn-primary btn-sm" target="_blank">新增</a>
+
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
-                <h5>需求列表</h5>
                 <table class="table table-striped">
                     <thead>
                         <tr>

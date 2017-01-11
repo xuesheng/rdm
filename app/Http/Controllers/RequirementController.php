@@ -164,7 +164,7 @@ class RequirementController extends Controller
         $requirements->user_id = Auth::id();
         $requirements->name = $data['name'];
         $requirements->sponsor = $data['sponsor'];
-        $requirements->finished_at = $data['finished_at'];
+        $requirements->finished_at = strtotime($data['finished_at']);
 
         if ($requirements->save()) {
             return response()->json([
