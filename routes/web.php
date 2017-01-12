@@ -32,3 +32,4 @@ Route::get('/user/center', 'UserController@baseInfo');
 Route::get('/user/zendao', 'UserController@zenDao');
 Route::get('/user/secure', 'UserController@secure');
 Route::post('/user/update', 'UserController@update');
+Route::post('/user/passwordreset', 'UserController@passwordReset');

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -75,12 +76,42 @@ class UserController extends Controller
 
     public function secure()
     {
-        return view('user.secure', [
-            'zendao_username' => Auth::user()->zendao_username,
-            'zendao_password' => Auth::user()->zendao_password
-        ]);
+        return view('user.secure');
     }
 
+    public function passwordReset(Request $request)
+    {
+        $input = $request->all();
 
+        $oldPassword = $request->input('old_password');
+        $password = $request->input('password');
+        $rules = [
+            'old_password' => 'required|between:6,20',
+            'password' => 'required|between:6,20|confirmed',
+        ];
+        $messages = [
+            'required' => '密码不能为空',
+            'between' => '密码必须是6~20位之间',
+            'confirmed' => '新密码和确认密码不匹配'
+        ];
+
+        $validator = Validator::make($input, $rules, $messages);
+
+        $user = Auth::user();
+        $validator->after(function ($validator) use ($oldPassword, $user) {
+            if (!Hash::check($oldPassword, $user->password)) {
+                $validator->errors()->add('old_password', '原密码错误');
+            }
+        });
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $user->password = bcrypt($password);
+        $user->save();
+        Auth::logout();
+        return redirect('/login');
+    }
 
 }

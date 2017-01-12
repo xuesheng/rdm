@@ -1,9 +1,10 @@
 @extends('user.layouts')
 @section('main')
-
     <div class="row">
         <div class="col-md-5 col-md-offset-1">
-            <form role="form" class="form-horizontal" action="{{ url('user/update') }}" method="post">
+            <form role="form" action="{{ url('user/update') }}" method="post">
+                <h4 class="font-green">基本信息</h4>
+
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label>用户名</label>

@@ -30,7 +30,7 @@
                             <td>{{ $list['serial_number'] }}</td>
                             <td>{{ $list['name'] }}</td>
                             <td>{{ $list['sponsor'] }}</td>
-                            <td>{{ $list['finished_at'] }}</td>
+                            <td>{{ date('Y-m-d H:i:s', $list['finished_at']) }}</td>
                             <td>2017-01-05 12:00:00</td>
                             <td>{{ $list['files_count'] }}（个）</td>
                             <td>

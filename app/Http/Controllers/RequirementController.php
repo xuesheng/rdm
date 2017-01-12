@@ -71,7 +71,7 @@ class RequirementController extends Controller
             'serial_number' => $requirements->serial_number,
             'name' => $requirements->name,
             'sponsor' => $requirements->sponsor,
-            'finished_at' => $requirements->finished_at,
+            'finished_at' => date('Y-m-d H:i:s', $requirements->finished_at),
             'sqls' => $requirements->sqls()->orderBy('id', 'desc')->pluck('sql'),
             'files' => $requirements->files()->get(['name','local_path']),
         ]);
