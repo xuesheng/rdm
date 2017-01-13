@@ -26,6 +26,9 @@ const app = new Vue({
         newSql: '',
         sqls: [],
         a_edit_hidden: true,
+        alert_update_remark_hidden: true,
+        alert_update_remark_success: false,
+        alert_update_remark_fail: false
     },
     methods: {
         implode: function (event) {
@@ -34,7 +37,7 @@ const app = new Vue({
             }
             this.$refs.button_fetch.disabled = true;
             this.$refs.input_serial_number.disabled = true;
-            this.$http.post('/requirement/implode', {serial_number: this.serial_number}).then(
+            this.$http.post('/requirement/postimport', {serial_number: this.serial_number}).then(
                 function (response) {
                     if (response.body.code) {
                         alert(response.body.msg);
@@ -68,7 +71,6 @@ const app = new Vue({
                     }
 
                     this.sqls.unshift(sql);
-                    console.log(this.sqls);
                     this.newSql = '';
 
 
@@ -77,6 +79,23 @@ const app = new Vue({
                 });
 
             }
+        },
+        addRemark: function() {
+            this.$refs.button_save_remark.disabled = true;
+            var remark = this.$refs.textarea_remark.value;
+            this.$http.post('/requirement/updateremark', {id: this.$refs.requirement_id.value, remark: remark}).then(function(response){
+                this.$refs.button_save_remark.disabled = false;
+                if (response.body.code) {
+                    this.alert_update_remark_fail = true;
+                } else {
+                    this.alert_update_remark_success = true;
+                }
+                this.alert_update_remark_hidden = false;
+                this.$refs.alert_update_remark.innerText = response.body.msg;
+            }, function(response){
+
+            });
+
         },
         ifContains: function (item, items) {
             for(var i in items)

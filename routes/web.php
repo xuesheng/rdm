@@ -20,12 +20,14 @@ Route::get('/dashboard', 'HomeController@index');
 
 //需求路由
 Route::get('/requirement/create', 'RequirementController@create');
-Route::post('/requirement/implode', 'RequirementController@implode');
+Route::get('/requirement/import', 'RequirementController@import');
+Route::post('/requirement/postimport', 'RequirementController@postImport');
 Route::post('/requirement/storeSql', 'RequirementController@storeSql');
 Route::get('/requirement/edit/{id}', 'RequirementController@edit');
 Route::get('/requirement/show/{id}', 'RequirementController@show');
 Route::post('/requirement/uploadfile', 'RequirementFileController@upload');
 Route::get('/requirement/lists', 'RequirementController@lists');
+Route::post('/requirement/updateremark', 'RequirementController@updateRemark');
 
 //用户路由
 Route::get('/user/center', 'UserController@baseInfo');

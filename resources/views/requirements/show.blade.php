@@ -14,8 +14,12 @@
                     <p><span>需求名称：</span><mark>{{ $name }}</mark></p>
                     <p><span>需求发起人：</span><mark>{{ $sponsor }}</mark></p>
                     <p><span>截止日期：</span><mark>{{ $finished_at }}</mark></p>
-                    <p><strong><span>上线时间：</span><mark>2017-01-08 12:00:00</mark></strong></p>
-                    <p><span>备注：</span><mark>{{ $finished_at }}</mark></p>
+                    <p><strong><span>上线时间：</span><mark>{{ $finished_at }}</mark></strong></p>
+                    <p><span>备注：</span>
+                        @foreach($remarks as $remark)
+                            <br><mark>{{ $remark }}</mark>
+                        @endforeach
+                    </p>
 
                 </div>
             </div>

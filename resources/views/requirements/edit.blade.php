@@ -17,8 +17,9 @@
 
                 <div>
                     <h6>备注</h6>
-                    <p><textarea class="form-control" name="remark" id="remark" rows="5"></textarea></p>
-                    <p><button class="btn btn-primary btn-sm">保存备注</button></p>
+                    <p><textarea class="form-control" name="remark" id="remark" rows="5" ref="textarea_remark">{{ $remark }}</textarea></p>
+                    <div class="alert alert-sm" v-cloak v-bind:class="{ 'hidden': alert_update_remark_hidden, 'alert-success': alert_update_remark_success,'alert-danger': alert_update_remark_fail }" ref="alert_update_remark"></div>
+                    <p><button class="btn btn-primary btn-sm" v-on:click="addRemark()" ref="button_save_remark">更新备注</button></p>
                 </div>
 
             </div>
@@ -28,7 +29,7 @@
                 <p><strong>上传代码</strong></p>
                 <form method="post" enctype="multipart/form-data" action="/requirement/uploadfile">
                     <input type="hidden" name="requirement_id" value="{{ $id }}">
-                    <p><input id="code-file" class="file" type="file" name="code_file"></p>
+                    <p><input id="code-file" class="file" type="file" name="code_file" multiple></p>
                     {{ csrf_field() }}
                     <p>
                         <h6>本地路径</h6>

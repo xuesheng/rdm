@@ -46,6 +46,17 @@ class RequirementController extends Controller
     }
 
     /**
+     * 导入需求
+     *
+     * @return Response
+     * @author Xues
+     */
+    public function import()
+    {
+        return view('requirements.import');
+    }
+
+    /**
      * 存储新的需求
      * @param Request $request 请求参数
      *
@@ -65,13 +76,13 @@ class RequirementController extends Controller
     public function show(Request $request, $id = 0)
     {
         $requirements = Requirements::findOrFail($id);
-
         return view('requirements.show', [
             'id' => $requirements->id,
             'serial_number' => $requirements->serial_number,
             'name' => $requirements->name,
             'sponsor' => $requirements->sponsor,
             'finished_at' => date('Y-m-d H:i:s', $requirements->finished_at),
+            'remarks' => explode(PHP_EOL, $requirements->remark),
             'sqls' => $requirements->sqls()->orderBy('id', 'desc')->pluck('sql'),
             'files' => $requirements->files()->get(['name','local_path']),
         ]);
@@ -112,9 +123,48 @@ class RequirementController extends Controller
         return response()->json([
             'code' => 1,
             'msg' => 'sql添加失败',
-            'data' => 0
+            'data' => null
         ]);
 
+    }
+
+    /**
+     * 更新备注
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author Xues
+     */
+    public function updateRemark(Request $request)
+    {
+        $id = $request->input('id');
+        $remark = $request->input('remark');
+
+        //根据id判断需求是否存在
+        if (!($requirement = Requirements::find($id))) {
+            return response()->json([
+                'code' => 1,
+                'msg' => '需求不存在',
+                'data' => null
+            ]);
+        }
+
+        $requirement->remark = $remark;
+
+        if ($requirement->save()) {
+            return response()->json([
+                'code' => 0,
+                'msg' => '更新成功',
+                'data' => $requirement->id
+            ]);
+
+        }
+
+        return response()->json([
+            'code' => 1,
+            'msg' => '更新失败',
+            'data' => null
+        ]);
 
     }
 
@@ -135,7 +185,7 @@ class RequirementController extends Controller
      * @param Request $request 请求参数
      * @return json
      */
-    public function implode(Request $request)
+    public function postImport(Request $request)
     {
         $serialNumber = $request->input('serial_number', 0);
         //先验证该需求是否存在
@@ -199,9 +249,10 @@ class RequirementController extends Controller
             'serial_number' => $requirements->serial_number,
             'name' => $requirements->name,
             'sponsor' => $requirements->sponsor,
-            'finished_at' => $requirements->finished_at,
+            'finished_at' => date('Y-m-d H:i:s', $requirements->finished_at),
             'sqls' => $requirements->sqls()->orderBy('id', 'desc')->pluck('sql'),
             'files' => $requirements->files()->get(['name','local_path']),
+            'remark' => $requirements->remark,
         ]);
     }
 
